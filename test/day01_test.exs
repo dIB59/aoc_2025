@@ -13,5 +13,7 @@ defmodule Day01Test do
 
     # 100 rem 100 should be 0
     assert Aoc.Day01.rotate(100) == 0
+
+    Aoc.Day01.execute()
   end
 end
