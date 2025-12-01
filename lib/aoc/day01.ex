@@ -54,13 +54,13 @@ defmodule Aoc.Day01 do
         |> Enum.reduce(initial_state, fn {direction, amount}, {current_pos, count} ->
           new_pos = rotate_dial(current_pos, direction, amount)
 
-          new_acc =
-            case rotation_result do
-              0 -> acc + 1
-              _ -> acc
+          new_count =
+            case new_pos do
+              0 -> count + 1
+              _ -> count
             end
 
-          new_acc
+          {new_pos, new_count}
         end)
         |> IO.inspect(label: "Final Count")
 
