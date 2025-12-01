@@ -1,4 +1,5 @@
 defmodule Aoc.Day01 do
+  @spec parseData() :: {:ok, [{String.t(), integer()}]} | {:error, atom()}
   def parseData() do
     case File.read("lib/aoc/day01data.txt") do
       {:ok, contet} ->
