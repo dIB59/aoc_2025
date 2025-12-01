@@ -33,4 +33,33 @@ defmodule Aoc.Day01 do
   def rotate(amount) do
     rem(100, amount)
   end
+
+  def execute() do
+    case parseData() do
+      {:ok, data} ->
+        data
+        |> Enum.reduce(0, fn {direction, amount}, acc ->
+          rotation_result =
+            case direction do
+              "L" -> rotate(-amount)
+              "R" -> rotate(amount)
+            end
+
+          IO.inspect(rotation_result)
+
+          new_acc =
+            case rotation_result do
+              0 -> acc + 1
+              _ -> acc
+            end
+
+          new_acc
+        end)
+        |> IO.inspect(label: "Final Count")
+
+      {:error, message} ->
+        IO.puts("Error: #{message}")
+        :error
+    end
+  end
 end
