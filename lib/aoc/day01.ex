@@ -48,13 +48,7 @@ defmodule Aoc.Day01 do
   def execute() do
     case parseData() do
       {:ok, data} ->
-        data
-        |> Enum.reduce(0, fn {direction, amount}, acc ->
-          rotation_result =
-            case direction do
-              "L" -> rotate(-amount)
-              "R" -> rotate(amount)
-            end
+        initial_state = {50, 0}
 
           IO.inspect(rotation_result)
 
