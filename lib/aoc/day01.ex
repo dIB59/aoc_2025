@@ -29,9 +29,20 @@ defmodule Aoc.Day01 do
     end
   end
 
-  @spec rotate(integer()) :: integer()
-  def rotate(amount) do
-    rem(100, amount)
+  # This is the new function that correctly handles circular rotation (0-99).
+  @spec rotate_dial(integer(), String.t(), integer()) :: integer()
+  defp rotate_dial(current_pos, direction, amount) do
+    # 1. Calculate the initial movement
+    initial_movement =
+      case direction do
+        # Right: Add
+        "R" -> current_pos + amount
+        # Left: Subtract
+        "L" -> current_pos - amount
+      end
+
+    IO.inspect(initial_movement / 100)
+    rem(initial_movement, 100)
   end
 
   def execute() do
