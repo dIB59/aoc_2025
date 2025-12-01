@@ -7,11 +7,17 @@ defmodule Aoc.Day01 do
         |> Enum.map(fn line -> String.trim(line) end)
         |> Enum.reject(fn line -> String.length(line) == 0 end)
         |> Enum.map(fn line ->
-          # Split the current line string by the second delimiter
-          String.split_at(line, 1)
-          # Debugging each inner list
-          |> IO.inspect(label: "Split Line")
-  |> Enum.map(fn line -> Integer.parse(line.1))
+          {first_char, rest_of_line} = String.split_at(line, 1)
+
+          # 2. Parse the number part
+          parsed_number =
+            rest_of_line
+            |> String.trim()
+            |> Integer.parse()
+            |> elem(0)
+
+          # 3. Return a tuple containing the ORIGINAL line AND the parsed number
+          {first_char, parsed_number}
         end)
     end
   end
