@@ -50,7 +50,9 @@ defmodule Aoc.Day01 do
       {:ok, data} ->
         initial_state = {50, 0}
 
-          IO.inspect(rotation_result)
+        data
+        |> Enum.reduce(initial_state, fn {direction, amount}, {current_pos, count} ->
+          new_pos = rotate_dial(current_pos, direction, amount)
 
           new_acc =
             case rotation_result do
