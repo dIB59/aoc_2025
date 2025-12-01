@@ -19,6 +19,7 @@ defmodule Aoc.Day01 do
           # 3. Return a tuple containing the ORIGINAL line AND the parsed number
           {first_char, parsed_number}
         end)
+        |> IO.inspect()
     end
   end
 
