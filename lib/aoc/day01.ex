@@ -49,7 +49,7 @@ defmodule Aoc.Day01 do
 
         data
         |> Enum.reduce(initial_state, fn {direction, amount}, {current_pos, count} ->
-          new_pos = rotate_dial(current_pos, direction, amount)
+          {new_pos, cross_zero} = rotate_dial(current_pos, direction, amount)
 
           new_count =
             case new_pos do
