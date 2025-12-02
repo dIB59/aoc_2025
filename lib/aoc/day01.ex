@@ -63,7 +63,6 @@ defmodule Aoc.Day01 do
           end
       end
 
-    IO.inspect({final_pos, zero_clicks})
     {final_pos, zero_clicks}
   end
 
