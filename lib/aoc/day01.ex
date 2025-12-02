@@ -38,8 +38,37 @@ defmodule Aoc.Day01 do
         "L" -> -amount
       end
 
-    IO.inspect(initial_movement / 100)
-    rem(initial_movement, 100)
+    final_pos = Integer.mod(current_pos + movement, 100)
+
+    # Calculate how many times the rotation crossed the 0/99 boundary.
+    zero_clicks =
+      case direction do
+        "R" ->
+          clicks =
+            case {current_pos + amount, current_pos} do
+              {0, _} -> 0
+              {100, _} -> 0
+              {_, 0} -> 0
+              _ -> div(current_pos + amount, 100)
+            end
+
+          clicks
+
+        "L" ->
+          case {amount - current_pos, current_pos} do
+            {_, 0} ->
+              0
+
+            {d, _} when d <= 0 ->
+              0
+
+            {d, _} ->
+              # This counts all clicks on 0 during the L rotation.
+              div(d + 99, 100)
+          end
+      end
+
+    {final_pos, zero_clicks}
   end
 
   def execute() do
