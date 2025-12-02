@@ -57,7 +57,7 @@ defmodule Aoc.Day01 do
               _ -> count
             end
 
-          {new_pos, new_count}
+          {new_pos, new_count + cross_zero}
         end)
         |> IO.inspect(label: "Final Count")
 
