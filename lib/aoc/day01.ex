@@ -34,10 +34,8 @@ defmodule Aoc.Day01 do
   def rotate_dial(current_pos, direction, amount) do
     movement =
       case direction do
-        # Right: Add
-        "R" -> current_pos + amount
-        # Left: Subtract
-        "L" -> current_pos - amount
+        "R" -> amount
+        "L" -> -amount
       end
 
     IO.inspect(initial_movement / 100)
