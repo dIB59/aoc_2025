@@ -29,7 +29,6 @@ defmodule Aoc.Day01 do
     end
   end
 
-  # This is the new function that correctly handles circular rotation (0-99).
   @spec rotate_dial(integer(), String.t(), integer()) :: {integer(), integer()}
   def rotate_dial(current_pos, direction, amount) do
     movement =
@@ -40,59 +39,58 @@ defmodule Aoc.Day01 do
 
     final_pos = Integer.mod(current_pos + movement, 100)
 
-    # Calculate how many times the rotation crossed the 0/99 boundary.
     zero_clicks =
       case direction do
+        # A click occurs every time the total distance (current_pos + amount)
+        # crosses a multiple of 100. Integer division handles this.
         "R" ->
-          clicks =
-            case {current_pos + amount, current_pos} do
-              {0, _} -> 0
-              {100, _} -> 0
-              {_, 0} -> 0
-              _ -> div(current_pos + amount, 100)
-            end
-
-          clicks
+          total_distance = current_pos + amount
+          div(total_distance - 1, 100)
 
         "L" ->
-          case {amount - current_pos, current_pos} do
-            {_, 0} ->
+          past_zero_distance = amount - current_pos
+
+          cond do
+            current_pos == 0 and amount < 100 ->
               0
 
-            {d, _} when d <= 0 ->
+            past_zero_distance <= 0 ->
               0
 
-            {d, _} ->
-              # This counts all clicks on 0 during the L rotation.
-              div(d + 99, 100)
+            # General case: Count how many full 100-step segments are covered past 0.
+            true ->
+              div(past_zero_distance + 99, 100)
           end
       end
 
+    IO.inspect({final_pos, zero_clicks})
     {final_pos, zero_clicks}
   end
 
   def execute() do
-    case parseData() do
-      {:ok, data} ->
-        initial_state = {50, 0}
+    d =
+      case parseData() do
+        {:ok, data} ->
+          initial_state = {50, 0}
 
-        data
-        |> Enum.reduce(initial_state, fn {direction, amount}, {current_pos, count} ->
-          {new_pos, cross_zero} = rotate_dial(current_pos, direction, amount)
+          data
+          |> Enum.reduce(initial_state, fn {direction, amount}, {current_pos, count} ->
+            {new_pos, cross_zero} = rotate_dial(current_pos, direction, amount)
 
-          new_count =
-            case new_pos do
-              0 -> count + 1
-              _ -> count
-            end
+            new_count =
+              case new_pos do
+                0 -> count + 1
+                _ -> count
+              end
 
-          {new_pos, new_count + cross_zero}
-        end)
-        |> IO.inspect(label: "Final Count")
+            {new_pos, new_count + cross_zero}
+          end)
 
-      {:error, message} ->
-        IO.puts("Error: #{message}")
-        :error
-    end
+        {:error, message} ->
+          IO.puts("Error: #{message}")
+          :error
+      end
+
+    d
   end
 end

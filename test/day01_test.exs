@@ -47,12 +47,11 @@ defmodule Day01Test do
       assert Aoc.Day01.rotate_dial(99, "L", 99) == {0, 0}
       assert Aoc.Day01.rotate_dial(0, "R", 14) == {14, 0}
       assert Aoc.Day01.rotate_dial(14, "L", 82) == {32, 1}
+      assert Aoc.Day01.rotate_dial(0, "R", 638) == {38, 6}
     end
   end
 
   test "rotate/1 returns the correct remainder" do
-    Aoc.Day01.parseData()
-
-    Aoc.Day01.execute()
+    IO.inspect(Aoc.Day01.execute())
   end
 end
