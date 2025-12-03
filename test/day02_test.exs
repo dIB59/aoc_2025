@@ -23,4 +23,11 @@ defmodule Day02Test do
       assert Day02.is_repeated(123) == false
     end
   end
+
+  describe "generate_list" do
+    test "Parse data" do
+      # invalid IDs (repeated halves)
+      assert Day02.parse_data()
+    end
+  end
 end
