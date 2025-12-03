@@ -5,7 +5,10 @@ defmodule Aoc.Day03 do
         data
         |> String.trim()
         |> String.split("\n")
-        |> Enum.map(&String.to_integer/1)
+        |> Enum.map(fn line ->
+          String.graphemes(line)
+          |> Enum.map(&String.to_integer/1)
+        end)
         |> IO.inspect()
     end
   end
