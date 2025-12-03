@@ -4,6 +4,12 @@ defmodule Day02Test do
   alias Aoc.Day02
 
   describe "is_repeated/1" do
+    test "returns true for one-digit repeated IDs" do
+      # invalid IDs (repeated halves)
+      assert Day02.is_repeated(1) == false
+      assert Day02.is_repeated(2) == false
+    end
+
     test "returns true for two-digit repeated IDs" do
       # invalid IDs (repeated halves)
       assert Day02.is_repeated(11) == true
@@ -28,6 +34,11 @@ defmodule Day02Test do
     test "Parse data" do
       # invalid IDs (repeated halves)
       assert Day02.parse_data()
+    end
+
+    test "Execute" do
+      # invalid IDs (repeated halves)
+      assert Day02.execute()
     end
   end
 end
