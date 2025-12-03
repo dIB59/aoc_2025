@@ -36,12 +36,10 @@ defmodule Aoc.Day02 do
       |> Enum.filter(&is_repeated/1)
     end)
     |> Enum.reject(fn s -> length(s) == 0 end)
-    |> IO.inspect()
     |> Enum.flat_map(fn
       x when is_list(x) -> x
       _ -> []
     end)
     |> Enum.sum()
-    |> IO.inspect()
   end
 end
