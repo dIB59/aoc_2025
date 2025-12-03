@@ -8,7 +8,22 @@ defmodule Day03Test do
   end
 
   test "get largest" do
-    Day03.get_biggest([1, 2, 2, 4, 5, 7, 9], 2)
-    |> IO.inspect(charlists: :as_lists)
+    assert [9, 8] ==
+             Day03.get_biggest([9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1], 2)
+             |> IO.inspect(charlists: :as_lists)
+  end
+
+  test "string to list" do
+    result =
+      "811111111111119"
+      |> Day03.string_to_num_list()
+      |> Day03.get_biggest(2)
+
+    assert result == [8, 9]
+  end
+
+  test "execute" do
+    Day03.execute()
+    |> IO.inspect()
   end
 end
