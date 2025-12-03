@@ -10,9 +10,25 @@ defmodule Aoc.Day02 do
 
       0 ->
         {first, last} = String.split_at(n, Integer.floor_div(len_num, 2))
-        IO.inspect(first == last)
 
         first == last
     end
+  end
+
+  def parse_data do
+    case File.read("lib/aoc/day02data.txt") do
+      {:ok, data} ->
+        data
+        |> String.trim()
+        |> String.split(",")
+        |> Enum.map(fn line ->
+          String.split(line, "-")
+          |> Enum.map(&String.to_integer/1)
+        end)
+        |> IO.inspect()
+    end
+  end
+
+  def execute() do
   end
 end
