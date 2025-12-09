@@ -52,6 +52,6 @@ defmodule Day01Test do
   end
 
   test "rotate/1 returns the correct remainder" do
-    IO.inspect(Aoc.Day01.execute())
+    Aoc.Day01.execute()
   end
 end

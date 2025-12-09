@@ -10,7 +10,6 @@ defmodule Day03Test do
   test "get largest" do
     assert [9, 8] ==
              Day03.get_biggest([9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1], 2)
-             |> IO.inspect(charlists: :as_lists)
   end
 
   test "string to list" do
@@ -18,7 +17,6 @@ defmodule Day03Test do
       "811111111111119"
       |> Day03.string_to_num_list()
       |> Day03.get_biggest(2)
-      |> IO.inspect(charlists: :as_lists)
 
     assert result == [8, 9]
   end
@@ -38,7 +36,6 @@ defmodule Day03Test do
         |> Day03.get_biggest(2)
         |> Enum.join()
         |> String.to_integer()
-        |> IO.inspect(charlists: :as_lists)
 
       assert result == expected
     end)
