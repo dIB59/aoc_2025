@@ -48,7 +48,7 @@ defmodule Aoc.Day03 do
 
   def execute do
     parse_data()
-    |> Enum.map(fn line -> get_biggest(line, 2) end)
+    |> Enum.map(fn line -> get_biggest(line, 12) end)
     |> Enum.map(fn line -> Enum.join(line) |> String.to_integer() end)
     |> Enum.sum()
   end
