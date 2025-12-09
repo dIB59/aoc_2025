@@ -18,8 +18,30 @@ defmodule Day03Test do
       "811111111111119"
       |> Day03.string_to_num_list()
       |> Day03.get_biggest(2)
+      |> IO.inspect(charlists: :as_lists)
 
     assert result == [8, 9]
+  end
+
+  test "largest joltage examples" do
+    examples = [
+      {"987654321111111", 98},
+      {"811111111111119", 89},
+      {"234234234234278", 78},
+      {"818181911112111", 92}
+    ]
+
+    Enum.each(examples, fn {input, expected} ->
+      result =
+        input
+        |> Day03.string_to_num_list()
+        |> Day03.get_biggest(2)
+        |> Enum.join()
+        |> String.to_integer()
+        |> IO.inspect(charlists: :as_lists)
+
+      assert result == expected
+    end)
   end
 
   test "execute" do
