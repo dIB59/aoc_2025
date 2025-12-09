@@ -19,14 +19,31 @@ defmodule Aoc.Day03 do
   end
 
   @spec get_biggest(list(), integer()) :: list()
-  def get_biggest(list, num) do
-    list
-    |> Enum.with_index()
-    |> Enum.sort_by(fn {num, _i} -> num end)
-    |> Enum.reverse()
-    |> Enum.take(num)
-    |> Enum.sort_by(fn {_num, idx} -> idx end)
-    |> Enum.map(fn {num, _i} -> num end)
+  def get_biggest(list, n), do: do_get_biggest(list, n, [])
+
+  defp do_get_biggest(_list, 0, acc), do: Enum.reverse(acc)
+  defp do_get_biggest([], _n, acc), do: Enum.reverse(acc)
+
+  defp do_get_biggest(list, n, acc) do
+    # We need to pick n more digits
+    # We can only look at the first (length - n + 1) positions
+    # to ensure we have enough digits left after our choice
+    search_range = length(list) - n + 1
+
+    # Get the sublist we can search in
+    searchable = Enum.take(list, search_range)
+
+    # Find the maximum in that range
+    max = Enum.max(searchable)
+
+    # Find the first occurrence of that max
+    max_index = Enum.find_index(list, &(&1 == max))
+
+    # Keep only elements after the chosen maximum
+    rest = Enum.slice(list, (max_index + 1)..-1//1)
+
+    # Add max to accumulator and recurse
+    do_get_biggest(rest, n - 1, [max | acc])
   end
 
   def execute do
